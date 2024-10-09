@@ -25,6 +25,7 @@ export default function Home() {
 				commodi quos quibusdam, reprehenderit asperiores modi pariatur? Assumenda repellat placeat quisquam corrupti esse praesentium
 				recusandae, sint rerum sequi?
 			</p>
+			<div className="pageHeader">TEST</div>
 		</>
 	);
 }

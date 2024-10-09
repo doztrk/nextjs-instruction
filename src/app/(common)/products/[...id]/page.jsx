@@ -1,13 +1,15 @@
+import { Pageheader } from "@/components/page-header";
 import React from "react";
 
 //DYNAMIC ROUTING
 
-const Page = ({params}) => {
-	console.log(params)
+const Page = ({ params }) => {
+	console.log(params);
 	return (
-		<div>
-			<div>Product details page {params.id}</div>
-		</div>
+		<>
+			<Pageheader title="Product Details" />
+			Product details page {params.id}
+		</>
 	);
 };
 

@@ -1,7 +1,12 @@
+import { Pageheader } from "@/components/page-header";
 import React from "react";
 
 const Page = () => {
-	return <div>Product Page</div>;
+	return (
+		<>
+			<Pageheader title="Products" />
+		</>
+	);
 };
 
 export default Page;
