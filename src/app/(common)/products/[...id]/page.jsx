@@ -12,7 +12,7 @@ export const generateMetadata = () => {
 };
 
 const Page = ({ params }) => {
-	console.log(params);
+	console.log("Product Detail's page dynamic");
 	return (
 		<>
 			<Pageheader title="Product Details" />

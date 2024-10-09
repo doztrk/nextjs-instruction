@@ -8,6 +8,8 @@ export const metadata = {
 };
 
 const Page = () => {
+
+	console.log("Product's page static")
 	return (
 		<>
 			<Pageheader title="Products" />

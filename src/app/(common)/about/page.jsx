@@ -1,4 +1,6 @@
+import { Client } from "@/components/client";
 import { Pageheader } from "@/components/page-header";
+import { Server } from "@/components/server";
 import Link from "next/link";
 import React from "react";
 
@@ -12,6 +14,11 @@ const Page = () => {
 		<>
 			<Pageheader title="About Us" />
 			<p></p>
+
+			<p></p>
+			<Client>
+				<Server />
+			</Client>
 		</>
 	);
 };
