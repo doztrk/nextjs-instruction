@@ -3,6 +3,14 @@ import React from "react";
 
 //DYNAMIC ROUTING
 
+export const generateMetadata = () => {
+	//fetch data
+	return {
+		title: " DYNAMIC Product Details",
+		description: "Cheap electronic devices",
+	};
+};
+
 const Page = ({ params }) => {
 	console.log(params);
 	return (
