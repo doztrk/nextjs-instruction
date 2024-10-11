@@ -1,22 +1,28 @@
 import { Pageheader } from "@/components/page-header";
+import { ProductDetails } from "@/components/product-details";
 import React from "react";
 
 //DYNAMIC ROUTING
 
-export const generateMetadata = () => {
-	//fetch data
+/* Dynamic Routing'de generateMetaData, statik'te metaData var name kullanılır. */
+export const generateMetadata = async ({ params }) => {
+	const res = await fetch(`https://dummyjson.com/products/${params.id}`);
+	const data = await res.json();
 	return {
-		title: " DYNAMIC Product Details",
-		description: "Cheap electronic devices",
+		title: data.title,
+		description: data.description,
 	};
 };
 
-const Page = ({ params }) => {
-	console.log("Product Detail's page dynamic");
+const Page = async ({ params }) => {
+	/* 	console.log("Product Detail's page dynamic routing9");
+	 */
+	const res = await fetch(`https://dummyjson.com/products/${params.id}`);
+	const data = await res.json();
 	return (
 		<>
-			<Pageheader title="Product Details" />
-			Product details page {params.id}
+			<Pageheader title={data.title} />
+			<ProductDetails product={data} />
 		</>
 	);
 };
