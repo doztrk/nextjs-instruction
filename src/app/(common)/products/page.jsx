@@ -7,6 +7,9 @@ export const metadata = {
 	description: "Cheap electronic devices",
 };
 
+//Time to revalidate
+export const revalidate = 30;
+
 const Page = async () => {
 	/* 	
 
