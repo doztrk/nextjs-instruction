@@ -1,6 +1,7 @@
 "use server";
 import { transformYupErrors } from "@/helpers/form-validation";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/dist/server/api-utils";
 import * as Yup from "yup";
 
 const FormSchema = Yup.object({
@@ -9,7 +10,7 @@ const FormSchema = Yup.object({
 	price: Yup.number().typeError("Price must be a number").required("Price is required"),
 	category: Yup.string().required("Category is required"),
 });
-export const createProductAction = async (formData) => {
+export const createProductAction = async (prevState, formData) => {
 	/*     const title = formData.get("title");
     const description = formData.get("description"); 
    */
@@ -35,7 +36,7 @@ export const createProductAction = async (formData) => {
 
 		const data = await res.json();
 		if (!res.ok) {
-			throw new Error();
+			throw new Error(data.message);
 		}
 
 		//4-Revalidation
@@ -54,7 +55,76 @@ export const createProductAction = async (formData) => {
 		}
 		return {
 			ok: false,
-			message: "Someting went wrong",
+			message: error?.message || "Something went wrong",
+			errors: null,
+		};
+	}
+};
+
+export const deleteProductAction = async (id) => {
+	try {
+		if (!id) {
+			throw new Error("ID is required");
+		}
+		const res = await fetch(`https://66c395ffd057009ee9c0b957.mockapi.io/products/${id}`, {
+			method: "DELETE",
+		});
+
+		const data = await res.json();
+
+		if (!res.ok) throw new Error(data.message);
+
+		revalidatePath("/dashboard/products");
+		revalidatePath("/products");
+
+		return {
+			ok: true,
+			message: "Product deleted successfully",
+			errors: null,
+		};
+	} catch (error) {
+		return {
+			ok: false,
+			message: error?.message || "Something went wrong",
+			errors: null,
+		};
+	}
+};
+
+export const updateProductAction = async (prevState, formData) => {
+	const fields = Object.fromEntries(formData);
+
+	try {
+		FormSchema.validateSync(fields, { abortEarly: false });
+		const res = await fetch(`https://66c395ffd057009ee9c0b957.mockapi.io/products/${fields.id}`, {
+			method: "PUT",
+			body: JSON.stringify(fields),
+			headers: {
+				"Content-Type": "application/json",
+			},
+		});
+		const data = await res.json();
+
+		if (!res.ok) throw new Error(data.message);
+
+		revalidatePath("/dashboard/products");
+		revalidatePath(`/dashboard/products/${fields.id}`);
+		revalidatePath("/products");
+		revalidatePath(`/products/${fields.id}`);
+		
+
+		return {
+			ok: true,
+			message: "Product updated successfully",
+			errors: null,
+		};
+	} catch (error) {
+		if (error instanceof Yup.ValidationError) {
+			return transformYupErrors(error.inner);
+		}
+		return {
+			ok: false,
+			message: error?.message || "Something went wrong",
 			errors: null,
 		};
 	}

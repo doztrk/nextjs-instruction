@@ -11,7 +11,7 @@ export const DashboardProductList = ({ products }) => {
 				<tr>
 					<th>#</th>
 					<th>Title</th>
-					<th>Categroy</th>
+					<th>Category</th>
 					<th>Price</th>
 					<th>
 						<ButtonNewProduct />
