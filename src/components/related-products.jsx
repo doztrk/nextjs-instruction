@@ -15,7 +15,7 @@ export const RelatedProducts = ({ relatedProducts }) => {
 				onSwiper={(swiper) => console.log(swiper)}
 			>
 				{relatedProducts.map((item) => (
-					<SwiperSlide key={item}>
+					<SwiperSlide key={item.id}>
 						<ProductCard {...item} />
 					</SwiperSlide>
 				))}

@@ -1,11 +1,12 @@
-import React from 'react'
+import { DashboardProductNew } from "@/components/dashboard-product-new";
+import React from "react";
 
 const Page = () => {
-  return (
-    <div>
-      New Product
-    </div>
-  )
-}
+	return (
+		<>
+			<DashboardProductNew />
+		</>
+	);
+};
 
-export default Page
+export default Page;
