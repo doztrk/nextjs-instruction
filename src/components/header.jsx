@@ -4,8 +4,9 @@ import React from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import menuItems from "@/helpers/data/main-menu.json";
 import Image from "next/image";
+import { UserMenu } from "./user-menu";
 
-export const Header = () => {
+export const Header = ({ children }) => {
 	return (
 		<Navbar expand="lg" className="bg-dark" data-bs-theme="dark" collapseOnSelect>
 			<Container>
@@ -21,6 +22,8 @@ export const Header = () => {
 							</Nav.Link>
 						))}
 					</Nav>
+
+					{children}
 				</Navbar.Collapse>
 			</Container>
 		</Navbar>
