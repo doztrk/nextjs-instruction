@@ -1,5 +1,5 @@
+import { LoginForm } from "@/components/login-form";
 import { Pageheader } from "@/components/page-header";
-import Redirect from "@/components/redirect";
 import React from "react";
 
 
@@ -12,7 +12,7 @@ const Page = () => {
 	return (
 		<>
 			<Pageheader title="Login" />
-			<Redirect />
+			<LoginForm/>
 		</>
 	);
 };
